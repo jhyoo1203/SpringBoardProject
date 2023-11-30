@@ -1,0 +1,28 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <title>Result Page</title>
+</head>
+<body>
+
+<header>
+    <div class="header-main">
+        <h1 class="header-title"><a th:href="@{/}">게시게시판</a></h1>
+    </div>
+</header>
+
+<section id="result-section">
+    <p th:text="${message}"></p>
+    <p><a th:href="@{/}">홈으로 돌아가기</a></p>
+</section>
+
+<footer>
+    © 2023 게시게시판. All rights reserved.
+</footer>
+
+</body>
+</html>

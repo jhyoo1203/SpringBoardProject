@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <title>Home Page</title>
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <!-- 로그인 성공 시에만 유저의 닉네임과 로그아웃 버튼을 표시 -->
+            <span th:if="${session.user}">
+                <span th:text="${session.user}">User</span>
+                <a th:href="@{/logout}">로그아웃</a>
+            </span>
+            <!-- 로그인하지 않은 경우에 로그인과 회원가입 버튼을 표시 -->
+            <span th:unless="${session.user}">
+                <a th:href="@{/login}">로그인</a>
+                <a th:href="@{/join}">회원가입</a>
+            </span>
+        </div>
+        <div class="header-main">
+            <h1 class="header-title"><a href="/">게시게시판</a></h1>
+        </div>
+    </header>
+
+    <nav>
+        <a href="free-board.html">자유게시판</a>
+        <a href="all-posts.html">전체게시판</a>
+        <a href="notice-board.html">공지사항</a>
+    </nav>
+
+    <section>
+        <h2>자유게시판 최신 게시물</h2>
+        <article th:each="post : ${freeBoardPosts}">
+            <h3 th:text="${post.title}">게시물 제목</h3>
+            <p th:text="${post.content}">게시물 내용이 여기에 들어갑니다.</p>
+        </article>
+
+        <h2>공지사항 최신 게시물</h2>
+        <article th:each="post : ${noticeBoardPosts}">
+            <h3 th:text="${post.title}">게시물 제목</h3>
+            <p th:text="${post.content}">게시물 내용이 여기에 들어갑니다.</p>
+        </article>
+    </section>
+
+    <footer>
+        © 2023 게시게시판. All rights reserved.
+    </footer>
+
+</body>
+</html>
