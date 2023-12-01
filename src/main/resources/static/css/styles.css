@@ -34,7 +34,7 @@ header {
 }
 
 .header-title {
-    font-size: 24px;
+    font-size: 36px;
 }
 
 .header-main a {
@@ -59,7 +59,7 @@ nav a {
 }
 
 nav a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 #login-section a {
@@ -113,7 +113,7 @@ nav a:hover {
     color: #ffcc00;
 }
 
-#register-section {
+#join-section {
     max-width: 400px;
     margin: auto;
     padding: 20px;
@@ -121,21 +121,21 @@ nav a:hover {
     border-radius: 5px;
 }
 
-#register-section form {
+#join-section form {
     display: flex;
     flex-direction: column;
 }
 
-#register-section label {
+#join-section label {
     margin-bottom: 5px;
 }
 
-#register-section input {
+#join-section input {
     padding: 8px;
     margin-bottom: 10px;
 }
 
-#register-section button {
+#join-section button {
     padding: 10px;
     background-color: #ffcc00;
     color: #333;
@@ -144,28 +144,49 @@ nav a:hover {
     cursor: pointer;
 }
 
-#register-section button:hover {
+#join-section button:hover {
     background-color: #e6b800;
 }
 
-#register-section p {
+#join-section p {
     margin-top: 10px;
 }
 
-#register-section a {
+#join-section a {
     color: #ffcc00;
 }
 
 section {
-    margin: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+section a{
+    text-decoration: none;
+}
+
+section a:visited{
+    color: #333;
 }
 
 article {
     background-color: #fff;
-    padding: 20px;
+    border: 1px solid #ddd;
     margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* 트랜지션 효과 추가 */
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+article:hover {
+    transform: scale(1.02);
+    background-color: #f0f0f0; /* 마우스 호버 시 색상 변경 */
 }
 
 footer {

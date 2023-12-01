@@ -38,4 +38,19 @@ public class HomeController {
         model.addAttribute("userDTO", new UserDTO());
         return "join";
     }
+
+    @GetMapping("/allPosts")
+    public String showAllPosts() {
+        return "all-posts";
+    }
+
+    @GetMapping("/freeBoard")
+    public String showFreeBoard() {
+        return "free-board";
+    }
+
+    @GetMapping("/noticeBoard")
+    public String showNoticeBoard() {
+        return "notice-board";
+    }
 }

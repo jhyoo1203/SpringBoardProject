@@ -9,7 +9,7 @@
     <body>
         <header>
             <div class="header-main">
-                <h1 class="header-title"><a href="index.html">게시게시판</a></h1>
+                <h1 class="header-title"><a th:href="@{/}">게시게시판</a></h1>
             </div>
         </header>
         
@@ -29,7 +29,7 @@
         <p th:if="${loginSuccess} == true">로그인 성공!</p>
         <p th:if="${loginSuccess} == false">로그인 실패. 아이디 또는 비밀번호를 확인하세요.</p>
     
-        <p>아직 계정이 없으신가요? <a href="register.html">회원가입</a></p>
+        <p>아직 계정이 없으신가요? <a th:href="@{/join}">회원가입</a></p>
     </section>
 
     <footer>
