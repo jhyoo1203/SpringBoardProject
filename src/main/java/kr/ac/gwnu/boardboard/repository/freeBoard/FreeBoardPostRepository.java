@@ -7,5 +7,5 @@ import kr.ac.gwnu.boardboard.entity.freeBoard.FreeBoardPost;
 
 @Repository
 public interface FreeBoardPostRepository extends JpaRepository<FreeBoardPost, Long> {
-    
+    FreeBoardPost findByPostId(Long postId);
 }

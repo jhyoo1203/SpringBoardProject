@@ -42,4 +42,14 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return Optional.ofNullable(commentRepository.save(comment));
     }
 
+    @Override
+    public FreeBoardPost getFreeBoard(FreeBoardPostDTO freeBoardPostDTO) {
+        Long postId = freeBoardPostDTO.getPostId();
+        String title = freeBoardPostDTO.getTitle();
+        String content = freeBoardPostDTO.getContent();
+
+        FreeBoardPost freeBoardPost = postRepository.findByPostId(postId);
+        return freeBoardPost;
+    }
+
 }

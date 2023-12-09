@@ -17,6 +17,7 @@ public class LoginController {
 
     private final UserService userService;
 
+    @Autowired
     public LoginController(UserService userService) {
         this.userService = userService;
     }
@@ -31,8 +32,8 @@ public class LoginController {
         User user = userService.authenticateUser(userDTO);
 
         if (user != null) {
-            session.setAttribute("user", user.getNickname());  // 세션에도 사용자 정보 추가
-        return "redirect:/";
+            session.setAttribute("user", user.getNickname()); // 세션에도 사용자 정보 추가
+            return "redirect:/";
         } else {
             model.addAttribute("loginSuccess", false);
             return "login";
