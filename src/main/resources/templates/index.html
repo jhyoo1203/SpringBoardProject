@@ -27,23 +27,37 @@
     </header>
 
     <nav>
-        <a th:href="@{/freeBoard}">자유게시판</a>
-        <a th:href="@{/allPosts}">전체게시판</a>
+        <a th:href="@{/allPosts}">전체게시판</a> |
+        <a th:href="@{/freeBoard}">자유게시판</a> |
         <a th:href="@{/noticeBoard}">공지사항</a>
     </nav>
 
     <section>
-        <h2>자유게시판 최신 게시물</h2>
-        <article th:each="post : ${freeBoardPosts}">
-            <h3 th:text="${post.title}">게시물 제목</h3>
-            <p th:text="${post.content}">게시물 내용이 여기에 들어갑니다.</p>
-        </article>
+        <a th:href="@{/allPosts}">
+            <article>
+                <h2>
+                    전체 게시판
+                </h2>
+                <p>게시물 내용 1</p>
+            </article>
+        </a>
+        <a th:href="@{/freeBoard}">
+            <article>
+                <h2>
+                    자유 게시판
+                </h2>
+                <p>게시물 내용 2</p>
+            </article>
+        </a>
+        <a th:href="@{/noticeBoard}">
+            <article>
+                <h2>
+                    공지사항
+                </h2>
+                <p>게시물 내용 3</p>
+            </article>
 
-        <h2>공지사항 최신 게시물</h2>
-        <article th:each="post : ${noticeBoardPosts}">
-            <h3 th:text="${post.title}">게시물 제목</h3>
-            <p th:text="${post.content}">게시물 내용이 여기에 들어갑니다.</p>
-        </article>
+        </a>
     </section>
 
     <footer>

@@ -15,21 +15,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        List<PostDTO> freeBoardPosts = Arrays.asList(
-                new PostDTO("자유게시판 제목 1", "자유게시판 내용이 여기에 들어갑니다."),
-                new PostDTO("자유게시판 제목 2", "자유게시판 내용이 여기에 들어갑니다."),
-                new PostDTO("자유게시판 제목 3", "자유게시판 내용이 여기에 들어갑니다.")
-        );
-
-        List<PostDTO> noticeBoardPosts = Arrays.asList(
-                new PostDTO("공지사항 제목 1", "공지사항 내용이 여기에 들어갑니다."),
-                new PostDTO("공지사항 제목 2", "공지사항 내용이 여기에 들어갑니다."),
-                new PostDTO("공지사항 제목 3", "공지사항 내용이 여기에 들어갑니다.")
-        );
-
-        model.addAttribute("freeBoardPosts", freeBoardPosts);
-        model.addAttribute("noticeBoardPosts", noticeBoardPosts);
-
         return "index";
     }
 
@@ -52,5 +37,10 @@ public class HomeController {
     @GetMapping("/noticeBoard")
     public String showNoticeBoard() {
         return "notice-board";
+    }
+
+    @GetMapping("/writePostPage")
+    public String showWritePostPage() {
+        return "write-post-page";
     }
 }
