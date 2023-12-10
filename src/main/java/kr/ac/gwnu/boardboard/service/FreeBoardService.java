@@ -11,5 +11,4 @@ public interface FreeBoardService {
     Optional<FreeBoardPost> saveFreeBoardPost(FreeBoardPostDTO postDTO);
     Optional<FreeBoardComment> saveFreeBoardComment(FreeBoardCommentDTO commentDTO);
 
-    FreeBoardPost getFreeBoard(FreeBoardPostDTO freeBoardPostDTO);
 }

@@ -10,4 +10,5 @@ public interface UserService {
     Optional<User> getUserById(Long userId);
     User authenticateUser(UserDTO userDTO);
 
+    User getUserByNickname(String nickname);
 }

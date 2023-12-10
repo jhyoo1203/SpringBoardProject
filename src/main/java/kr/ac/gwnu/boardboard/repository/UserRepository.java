@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.gwnu.boardboard.entity.User;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsernameAndPassword(String username, String password);
+    Optional<User> findByNickname(String nickname);
 }

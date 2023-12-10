@@ -1,7 +1,11 @@
 package kr.ac.gwnu.boardboard.service;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import kr.ac.gwnu.boardboard.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +20,19 @@ import kr.ac.gwnu.boardboard.repository.noticeBoard.NoticeBoardPostRepository;
 public class NoticeBoardServiceImpl implements NoticeBoardService {
     private final NoticeBoardPostRepository postRepository;
     private final NoticeBoardCommentRepository commentRepository;
+    private final UserService userService;
+    private final HttpServletRequest request;
 
     @Autowired
-    public NoticeBoardServiceImpl(NoticeBoardPostRepository postRepository, NoticeBoardCommentRepository commentRepository) {
+    public NoticeBoardServiceImpl(
+            NoticeBoardPostRepository postRepository,
+            NoticeBoardCommentRepository commentRepository,
+            UserService userService,
+            HttpServletRequest request) {
         this.postRepository = postRepository;
         this.commentRepository = commentRepository;
+        this.userService = userService;
+        this.request = request;
     }
 
     @Override
@@ -30,7 +42,27 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
         post.setTitle(postDTO.getTitle());
         post.setContent(postDTO.getContent());
 
+        // 현재 시간을 Timestamp로 생성
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        post.setTimestamp(timestamp);
+
+        // 세션에서 현재 로그인한 사용자 정보 가져오기
+        User user = getCurrentUserFromSession();
+        post.setUser(user);
+
         return Optional.ofNullable(postRepository.save(post));
+    }
+
+    private User getCurrentUserFromSession() {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String nickname = (String) session.getAttribute("user");
+            if (nickname != null) {
+                return userService.getUserByNickname(nickname);
+            }
+        }
+        // 세션에 사용자 정보가 없으면 예외 처리 또는 기본값 반환
+        return null;
     }
 
     @Override

@@ -11,13 +11,20 @@
 <body>
 
     <header>
-        <!-- 헤더 부분은 필요에 따라 추가하세요. -->
         <div class="header-top">
-            <a th:href="@{/login}">로그인</a>
-            <a th:href="@{/join}">회원가입</a>
+            <!-- 로그인 성공 시에만 유저의 닉네임과 로그아웃 버튼을 표시 -->
+            <span th:if="${session.user}">
+                    <span th:text="${session.user}">User</span>
+                    <a th:href="@{/logout}">로그아웃</a>
+                </span>
+            <!-- 로그인하지 않은 경우에 로그인과 회원가입 버튼을 표시 -->
+            <span th:unless="${session.user}">
+                    <a th:href="@{/login}">로그인</a>
+                    <a th:href="@{/join}">회원가입</a>
+                </span>
         </div>
         <div class="header-main">
-            <h1 class="header-title"><a href="index.html">게시게시판</a></h1>
+            <h1 class="header-title"><a th:href="@{/}">게시게시판</a></h1>
         </div>
     </header>
 
@@ -31,20 +38,45 @@
 
     <section id="upload_content">
         <!-- 글 쓰기 양식 -->
-        <form>
+        <form id="postForm" method="post">
             <div id="write-post-top">
                 <select id="board-select" name="board">
-                    <option value="free-board">자유게시판</option>
-                    <option value="notice-board">공지사항</option>
+                    <option value="freeboard">자유게시판</option>
+                    <option value="noticeboard">공지사항</option>
                 </select>
                 <input type="text" id="title" name="title" placeholder="제목을 입력하세요" required>
-
-            </div>            
+            </div>
             <label for="content_area">내용:</label>
             <textarea id="content_area" name="content" rows="8" required></textarea>
 
-            <button id="upload_content_button" type="submit">글 올리기</button>
+            <button id="upload_content_button" type="button" onclick="submitForm()">글 올리기</button>
         </form>
+
+        <script th:inline="javascript">
+            function submitForm() {
+                var selectedBoard = document.getElementById('board-select').value;
+                var form = document.getElementById('postForm');
+                var actionUrl = '/api/' + selectedBoard + '/post';
+
+                var formData = new FormData(form);
+
+                fetch(actionUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData.entries()))
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+
+                    // 글 작성이 성공적으로 완료되면 이전 페이지로 이동
+                    window.history.back();
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        </script>
     </section>
 
     <footer>
