@@ -39,25 +39,21 @@
             <button class="write-post-btn" th:onclick="|javascript:window.location='@{/writePostPage}'|">글 쓰기</button>
 
         </nav>
-        
-    <section>
-        <!-- 자유 게시물만 표시 -->
-        <article class="free-post">
-            <h2>자유 게시물 1</h2>
-            <p>게시물 내용이 여기에 들어갑니다.</p>
-        </article>
 
-        <article class="free-post">
-            <h2>자유 게시물 2</h2>
-            <p>게시물 내용이 여기에 들어갑니다.</p>
-        </article>
+        <section>
+            <!-- 최신 FreeBoardPost를 Thymeleaf를 사용하여 동적으로 표시 -->
+            <div th:each="post : ${latestFreeBoardPosts}">
+                <article class="free-post">
+                    <h2 th:text="${post.title}"></h2>
+                    <p th:text="${post.user.nickname + ' | ' + post.timestamp}"></p><br><br>
+                    <p th:text="${post.content}"></p>
+                </article>
+            </div>
+        </section>
 
-        <!-- 추가적인 자유 게시물들을 동적으로 표시하거나, 페이지를 넘기는 등의 기능을 구현할 수 있습니다. -->
-    </section>
-
-    <footer>
-        © 2023 게시게시판. All rights reserved.
-    </footer>
+        <footer>
+            © 2023 게시게시판. All rights reserved.
+        </footer>
 
 </body>
 </html>

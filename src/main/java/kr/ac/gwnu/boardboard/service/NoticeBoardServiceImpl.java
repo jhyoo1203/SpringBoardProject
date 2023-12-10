@@ -1,12 +1,16 @@
 package kr.ac.gwnu.boardboard.service;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.ac.gwnu.boardboard.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kr.ac.gwnu.boardboard.dto.noticeBoard.NoticeBoardCommentDTO;
@@ -72,5 +76,16 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
         comment.setContent(commentDTO.getContent());
 
         return Optional.ofNullable(commentRepository.save(comment));
+    }
+
+    @Override
+    public Optional<List<NoticeBoardPost>> getLatestNoticeBoardPosts(int count) {
+        // 최신 글을 count 개수만큼 가져오는 로직
+        Sort sort = Sort.by(Sort.Direction.DESC, "timestamp");
+        Pageable pageable = PageRequest.of(0, count, sort);
+
+        List<NoticeBoardPost> latestPosts = postRepository.findAll(pageable).getContent();
+
+        return Optional.ofNullable(latestPosts.isEmpty() ? null : latestPosts);
     }
 }

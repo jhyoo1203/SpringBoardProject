@@ -41,19 +41,13 @@
     </nav>
 
     <section>
-        <article>
-            <h3><a href="#">공지사항 제목 1</a></h3>
-            <p>공지사항 내용 1</p>
-        </article>
-        <article>
-            <h3><a href="#">공지사항 제목 2</a></h3>
-            <p>공지사항 내용 2</p>
-        </article>
-        <article>
-            <h3><a href="#">공지사항 제목 3</a></h3>
-            <p>공지사항 내용 3</p>
-        </article>
-        <!-- 추가적인 공지사항 항목을 필요에 따라 추가 -->
+        <!-- 최신 FreeBoardPost를 Thymeleaf를 사용하여 동적으로 표시 -->
+        <div th:each="post : ${latestNoticeBoardPosts}">
+            <article>
+                <h2 th:text="${post.title}"></h2>
+                <p th:text="${post.content}"></p>
+            </article>
+        </div>
     </section>
 
     <!-- 페이지 내용 -->

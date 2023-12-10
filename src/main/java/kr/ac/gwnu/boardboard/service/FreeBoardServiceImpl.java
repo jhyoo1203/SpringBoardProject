@@ -1,12 +1,16 @@
 package kr.ac.gwnu.boardboard.service;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.ac.gwnu.boardboard.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kr.ac.gwnu.boardboard.dto.freeBoard.FreeBoardCommentDTO;
@@ -76,5 +80,20 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     }
 
 
+    @Override
+    public Optional<List<FreeBoardPost>> getLatestFreeBoardPosts(int count) {
+        // 최신 글을 count 개수만큼 가져오는 로직
+        Sort sort = Sort.by(Sort.Direction.DESC, "timestamp");
+        Pageable pageable = PageRequest.of(0, count, sort);
+
+        List<FreeBoardPost> latestPosts = postRepository.findAll(pageable).getContent();
+
+        return Optional.ofNullable(latestPosts.isEmpty() ? null : latestPosts);
+    }
+
+    @Override
+    public Optional<FreeBoardPost> getFreeBoardPostById(Long postId) {
+        return postRepository.findById(postId);
+    }
 
 }

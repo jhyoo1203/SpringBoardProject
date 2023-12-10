@@ -27,26 +27,27 @@
     </header>
 
     <nav>
-        <a th:href="@{/allPosts}">전체게시판</a> |
-        <a th:href="@{/freeBoard}">자유게시판</a> |
-        <a th:href="@{/noticeBoard}">공지사항</a>
+        <div class="search-box">
+            <input type="text" placeholder="검색어를 입력하세요">
+            <button type="button">검색</button>
+        </div>
+        <div class="nav-left">
+            <a th:href="@{/}">홈</a> |
+            <a th:href="@{/freeBoard}">자유게시판</a> |
+            <a th:href="@{/noticeBoard}">공지사항</a>
+        </div>
+
+        <button class="write-post-btn" th:onclick="|javascript:window.location='@{/writePostPage}'|">글 쓰기</button>
+
     </nav>
 
     <section>
-        <a th:href="@{/allPosts}">
-            <article>
-                <h2>
-                    전체 게시판
-                </h2>
-                <p>게시물 내용 1</p>
-            </article>
-        </a>
         <a th:href="@{/freeBoard}">
             <article>
                 <h2>
                     자유 게시판
                 </h2>
-                <p>게시물 내용 2</p>
+                <p>자유 게시판 보기</p>
             </article>
         </a>
         <a th:href="@{/noticeBoard}">
@@ -54,7 +55,7 @@
                 <h2>
                     공지사항
                 </h2>
-                <p>게시물 내용 3</p>
+                <p>공지사항 보기</p>
             </article>
 
         </a>
