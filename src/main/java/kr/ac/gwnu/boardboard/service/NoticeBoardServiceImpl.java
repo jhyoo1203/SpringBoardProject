@@ -27,6 +27,7 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
     private final UserService userService;
     private final HttpServletRequest request;
 
+    // 의존성 주입
     @Autowired
     public NoticeBoardServiceImpl(
             NoticeBoardPostRepository postRepository,
@@ -59,13 +60,13 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 
     private User getCurrentUserFromSession() {
         HttpSession session = request.getSession(false);
+        // 세션에 사용자 정보가 없으면 예외 처리 또는 기본값 반환
         if (session != null) {
             String nickname = (String) session.getAttribute("user");
             if (nickname != null) {
                 return userService.getUserByNickname(nickname);
             }
         }
-        // 세션에 사용자 정보가 없으면 예외 처리 또는 기본값 반환
         return null;
     }
 

@@ -12,6 +12,4 @@ public interface FreeBoardService {
     Optional<FreeBoardPost> saveFreeBoardPost(FreeBoardPostDTO postDTO);
     Optional<FreeBoardComment> saveFreeBoardComment(FreeBoardCommentDTO commentDTO);
     Optional<List<FreeBoardPost>> getLatestFreeBoardPosts(int count);
-    Optional<FreeBoardPost> getFreeBoardPostById(Long postId);
-
 }

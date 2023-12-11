@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User authenticateUser(UserDTO userDTO) {
+        // username과 password 일치할 시 리턴
         String username = userDTO.getUsername();
         String password = userDTO.getPassword();
 
